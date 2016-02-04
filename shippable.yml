@@ -12,10 +12,10 @@ env:
 
 build:
   pre_ci:
-    - docker build -t=shippabledocker/hitchcock2_sample_python .
+    - docker build --rm -t=gcr.io/vidya-project/pyt-img .
 
   pre_ci_boot:
-    image_name: shippabledocker/hitchcock2_sample_python
+    image_name: gcr.io/vidya-project/pyt-img
     image_tag: latest
     pull: false
     options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
@@ -25,13 +25,17 @@ build:
     - ls -al
 
   post_ci:
-    - docker push shippabledocker/hitchcock2_sample_python
+    #- docker tag -f drydock/u14nod shippabledocker/vidya_sample_node
+    - docker push gcr.io/vidya-project/pyt-img
+
+  smoke_test:
+    - sudo ls /
 
 
 integrations:
   hub:
-    - integrationName: ship-docker
-      type: docker
+    - integrationName: ship-gcr
+      type: gcr
       branches:
         only:
           - master
