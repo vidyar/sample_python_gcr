@@ -11,13 +11,13 @@ env:
     - M1=ONE
 
 build:
-  pre_ci:
-    - docker build --rm -t=gcr.io/vidya-project/pyt-img .
+ # pre_ci:
+  #  - docker build --rm -t=gcr.io/vidya-project/pyt-img .
 
   pre_ci_boot:
     image_name: gcr.io/vidya-project/pyt-img
     image_tag: latest
-    pull: false
+    pull: true
     options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
 
   ci:
@@ -25,8 +25,14 @@ build:
     - ls -al
 
   post_ci:
-    #- docker tag -f drydock/u14nod shippabledocker/vidya_sample_node
-    - docker push gcr.io/vidya-project/pyt-img
+    - docker build -t=gcr.io/vidya-project/pyt-img .
+    - docker push gcr.io/vidya-project/pyt-img 
+    - docker build --rm -t=gcr.io/vidya-project/pyt-img:test .
+    - docker build --rm -t=gcr.io/vidya-project/pyt-img:qa .
+    - docker push gcr.io/vidya-project/pyt-img:test
+    - docker push gcr.io/vidya-project/pyt-img:qa
+    - docker push gcr.io/vidya-project/pyt-img:test!@@
+    - docker push gcr.io/vidya-project/pyt-img:test!@@
 
   smoke_test:
     - sudo ls /
@@ -36,6 +42,4 @@ integrations:
   hub:
     - integrationName: ship-gcr
       type: gcr
-      branches:
-        only:
-          - master
+      
