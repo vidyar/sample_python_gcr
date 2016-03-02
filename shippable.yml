@@ -12,10 +12,10 @@ env:
 
 build:
   pre_ci:
-    - docker build --rm -t=gcr.io/vidya-project/pyt-img .
+    - docker build --rm -t=gcr.io/vidya-project/pyt-img-test .
 
   pre_ci_boot:
-    image_name: gcr.io/vidya-project/pyt-img
+    image_name: gcr.io/vidya-project/pyt-img-test
     image_tag: latest
     pull: false
     options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
@@ -26,7 +26,7 @@ build:
 
   post_ci:
     #- docker tag -f drydock/u14nod shippabledocker/vidya_sample_node
-    - docker push gcr.io/vidya-project/pyt-img
+    - docker push gcr.io/vidya-project/pyt-img-test
 
   smoke_test:
     - sudo ls /
