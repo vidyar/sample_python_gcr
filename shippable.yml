@@ -16,7 +16,7 @@ build:
 
   pre_ci_boot:
     image_name: gcr.io/vidya-project/pyt-img-test
-    image_tag: latest.1
+    image_tag: latest
     pull: false
     options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
 
