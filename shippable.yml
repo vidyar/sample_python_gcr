@@ -12,7 +12,7 @@ env:
 
 build:
   pre_ci:
-    - - docker build --rm -t=gcr.io/vidya-project/pyt-img:latest.1 .
+    - docker build --rm -t=gcr.io/vidya-project/pyt-img:latest.1 .
 
   pre_ci_boot:
     image_name: gcr.io/vidya-project/pyt-img-test
