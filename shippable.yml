@@ -35,8 +35,7 @@ integrations:
   hub:
     - integrationName: ship-gcr
       type: gcr
-      branches:
-        only:
+      
   
   
   notifications:
